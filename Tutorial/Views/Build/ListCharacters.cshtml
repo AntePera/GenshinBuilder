@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Character>
+
+<h1>Characters</h1>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Element</th>
+            <th>Region</th>
+            <th>Weapon Type</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var character in Model)
+        {
+            <tr>
+                <td>@character.Name</td>
+                <td>@character.Element</td>
+                <td>@character.Region</td>
+                <td>@character.CharacterWeaponType</td>
+            </tr>
+        }
+    </tbody>
+</table>

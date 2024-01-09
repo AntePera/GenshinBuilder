@@ -1,0 +1,96 @@
+﻿@using Tutorial.Data.Enum;
+@using Tutorial.ViewModels;
+@model BuildViewModel
+
+<form method="post" asp-action="Create" >
+    <div class="mb-3">
+        @Html.Label("Set Name")
+        <select class="form-control" asp-for="SetName">
+            <option value="">Select Set</option>
+            <option value="4pc Gladiator's Finale">4pc Gladiator's Finale</option>
+            <option value="4pc Wanderer's Troupe">4pc Wanderer's Troupe</option>
+            <option value="4pc Noblesse Oblige">4pc Noblesse Oblige</option>
+            <option value="4pc Bloodstained Chivalry">4pc Bloodstained Chivalry</option>
+            <option value="4pc Maiden Beloved">4pc Maiden Beloved</option>
+            <option value="4pc Viridescent Venerer">4pc Viridescent Venerer</option>
+            <option value="4pc Archaic Petra">4pc Archaic Petra</option>
+            <option value="4pc Emblem of Severed Fate">4pc Emblem of Severed Fate</option>
+            <option value="4pc Shimenawa's Reminiscence">4pc Shimenawa's Reminiscence</option>
+            <option value="4pc Retracing Bolide">4pc Retracing Bolide</option>
+            <option value="4pc Thundersoother">4pc Thundersoother</option>
+            <option value="4pc Thundering Fury">4pc Thundering Fury</option>
+            <option value="4pc Lavawalker">4pc Lavawalker</option>
+            <option value="4pc Crimson Witch of Flames">4pc Crimson Witch of Flames</option>
+            <option value="4pc Blizzard Strayer">4pc Blizzard Strayer</option>
+            <option value="4pc Ocean-Hued Clam">4pc Ocean-Hued Clam</option>
+            <option value="4pc Vermillion Hereafter">4pc Vermillion Hereafter</option>
+            <option value="4pc Echoes of an Offering">4pc Echoes of an Offering</option>
+            <option value="4pc Deepwood Memories">4pc Deepwood Memories</option>
+            <option value="4pc Gilded Dreams">4pc Gilded Dreams</option>
+            <option value="4pc Desert Pavilion Chronicle">4pc Desert Pavilion Chronicle</option>
+            <option value="4pc Flower of Paradise Lost">4pc Flower of Paradise Lost</option>
+            <option value="4pc Nymph's Dream">4pc Nymph's Dream</option>
+            <option value="4pc Vourukasha's Glow">4pc Vourukasha's Glow</option>
+            <option value="2pc Pale Flame 2pc Bloodstained Chivalry">2pc Pale Flame 2pc Bloodstained Chivalry</option>
+            <option value="2pc Emblem of Severed Fate 2pc Tenacity of the Millelith">2pc Emblem of Severed Fate 2pc Tenacity of the Millelith</option>
+            <option value="2pc Crimson Witch of Flames 2pc +18% ATK set">2pc Crimson Witch of Flames 2pc +18% ATK set</option>
+            <option value="2pc Tenacity of the Millelith 2pc Vourukasha's Glow">2pc Tenacity of the Millelith 2pc Vourukasha's Glow</option>
+            <option value="2pc +20% HP set 2pc +20% HP set">2pc +20% HP set 2pc +20% HP set</option>
+            <option value="2pc Thundering Fury 2pc +18% ATK set">2pc Thundering Fury 2pc +18% ATK set</option>
+            <option value="2pc Noblesse Oblige 2pc Blizzard Strayer">2pc Noblesse Oblige 2pc Blizzard Strayer</option>
+            <option value="2pc Noblesse Oblige 2pc Archaic Petra">2pc Noblesse Oblige 2pc Archaic Petra</option>
+        </select>
+        <span asp-validation-for="SetName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        @Html.Label("Description")
+        <select class="form-control" asp-for="Description">
+            <option value="">Select Description</option>
+            <option value="Stack Elemental Mastery and focus on Crit DMG">Stack Elemental Mastery and focus on Crit DMG</option>
+            <option value="Try to get a good overall attack and 1:2 Crit Rate to Crit DMG ratio">Try to get a good overall attack and 1:2 Crit Rate to Crit DMG ratio</option>
+            <option value="Focus mainly on energy recharge then balance out the Crit Rate to Crit DMG ratio to be as close 1:2">Focus mainly on energy recharge then balance out the Crit Rate to Crit DMG ratio to be as close 1:2</option>
+            <option value="Stack Defense and get decent Energy Recharge">Stack Defense and get decent Energy Recharge</option>
+        </select>
+    </div>
+    <br />
+    <div class="mb-3">
+        <label asp-for="BuildWeaponType">Weapon Type</label>
+        <select id="weaponTypeDropdown" asp-for="BuildWeaponType" class="form-control form-control-lg">
+            <option value="">--Select--</option>
+            @foreach (var weaponType in Enum.GetNames(typeof(WeaponType)))
+            {
+                <option value="@weaponType">@weaponType</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+            <select class="form-control" asp-for="WeaponId">
+                <option value="">Select Weapon</option>
+                @foreach (var weapon in Model.Weapons)
+                {
+                <option value="@weapon.WeaponId" data-weapon-type="@weapon.Type.ToString()">@weapon.Name</option>
+                }
+            </select>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#weaponTypeDropdown').change(function () {
+                var selectedWeaponType = $(this).val();
+
+                // Hide all options in the second dropdown
+                $('#WeaponId option').hide();
+
+                // Show options that match the selected Weapon Type
+                $('#WeaponId option[data-weapon-type="' + selectedWeaponType + '"]').show();
+
+                // Select the default option
+                $('#WeaponId').val('');
+            });
+        });
+
+    </script>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

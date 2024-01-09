@@ -1,0 +1,65 @@
+﻿@using Tutorial.Data.Enum;
+@using Tutorial.ViewModels;
+@model CharacterViewModel
+<form method="post" asp-action="Create">
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Character Name</label>
+        <input asp-for="Name" class="form-control" placeholder="Name">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Element">Element</label>
+        <select asp-for="Element" asp-items="@Html.GetEnumSelectList<Element>()" class="form-control form-control-lg">
+            <option>--Select--</option>
+        </select>
+        <span asp-validation-for="Element" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Region">Region</label>
+        <select asp-for="Region" asp-items="@Html.GetEnumSelectList<Region>()" class="form-control form-control-lg">
+            <option>--Select--</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label asp-for="CharacterWeaponType">Weapon Type</label>
+        <select id="weaponTypeDropdown" asp-for="CharacterWeaponType" class="form-control form-control-lg">
+            <option value="">--Select--</option>
+            @foreach (var weaponType in Enum.GetNames(typeof(WeaponType)))
+            {
+                <option value="@weaponType">@weaponType</option>
+            }
+        </select>
+    </div>
+
+    <!-- Second Dropdown (Select Build) -->
+    <div class="mb-3">
+        <select class="form-control" asp-for="BuildId">
+            <option value="">Select Build</option>
+            @foreach (var build in Model.Builds)
+            {
+
+                <option value="@build.BuildId" data-weapon-type="@build.WeaponType">@build.BuildName, @build.WeaponName, @build.WeaponType</option>
+            }
+        </select>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#weaponTypeDropdown').change(function () {
+                var selectedWeaponType = $(this).val();
+
+                // Hide all options in the second dropdown
+                $('#BuildId option').hide();
+
+                // Show options that match the selected Weapon Type
+                $('#BuildId option[data-weapon-type="' + selectedWeaponType + '"]').show();
+
+                // Select the default option
+                $('#BuildId').val('');
+            });
+        });
+
+    </script>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

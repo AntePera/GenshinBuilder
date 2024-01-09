@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Weapon>
+
+<h1>Weapons</h1>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Substat</th>
+            <th>Edit</th>
+            <th>Delete</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var weapon in Model)
+        {
+            <tr>
+                <td>@weapon.Name</td>
+                <td>@weapon.Type</td>
+                <td>@weapon.Substat</td>
+                <td>@Html.ActionLink("Edit", "Edit", new { id = weapon.WeaponId })</td>
+                <td>@Html.ActionLink("Delete", "Delete", new { id = weapon.WeaponId })</td>
+
+
+            </tr>
+        }
+    </tbody>
+</table>

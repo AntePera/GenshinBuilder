@@ -1,0 +1,24 @@
+﻿@using Tutorial.Data.Enum;
+@model Weapon
+
+<form method="post" asp-action="Edit">
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Weapon Name</label>
+        <input asp-for="Name" class="form-control" placeholder="Name">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Type">Weapon Type</label>
+        <select asp-for="Type" asp-items="@Html.GetEnumSelectList<WeaponType>()" class="form-control form-control-lg">
+            <option>--Select--</option>
+        </select>
+        <span asp-validation-for="Type" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Substat">Substat</label>
+        <select asp-for="Substat" asp-items="@Html.GetEnumSelectList<Substat>()" class="form-control form-control-lg">
+            <option>--Select--</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

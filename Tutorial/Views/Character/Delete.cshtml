@@ -1,0 +1,35 @@
+﻿@using Tutorial.Data.Enum;
+@model Character
+
+<form method="post" asp-action="Delete">
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Character Name</label>
+        <input asp-for="Name" class="form-control" placeholder="Name">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Element">Element</label>
+        <select asp-for="Element" asp-items="@Html.GetEnumSelectList<Element>()" class="form-control form-control-lg">
+            <option>--Select--</option>
+        </select>
+        <span asp-validation-for="Element" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Region">Region</label>
+        <select asp-for="Region" asp-items="@Html.GetEnumSelectList<Region>()" class="form-control form-control-lg">
+            <option>--Select--</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label asp-for="CharacterWeaponType" class="form-label">Character Weapon Type</label>
+        <select asp-for="CharacterWeaponType" class="form-control" placeholder="CharacterWeaponType">
+            <option value="Sword">Sword</option>
+            <option value="Bow">Bow</option>
+            <option value="Catalyst">Catalyst</option>
+            <option value="Claymore">Claymore</option>
+            <option value="Polearm">Polearm</option>
+        </select>
+        <span asp-validation-for="CharacterWeaponType" class="text-danger"></span>
+    </div>  
+    <button type="submit" class="btn btn-danger">Delete</button>
+</form>

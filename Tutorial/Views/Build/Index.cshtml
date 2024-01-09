@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Build>
+
+<h1>Builds</h1>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Weapon</th>
+            <th>Characters</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var build in Model)
+        {
+            <tr>
+                <td>@build.BuildName</td>
+                <td>@build.BuildDescription</td>
+                <td>@build.WeaponName</td>
+                <td>@Html.ActionLink("See Characters", "ListCharacters", new { id = build.BuildId })</td>
+                <td>@Html.ActionLink("Edit", "Edit", new { id = build.BuildId })</td>
+                <td>@Html.ActionLink("Delete", "Delete", new { id = build.BuildId })</td>
+            </tr>
+        }
+    </tbody>
+</table>

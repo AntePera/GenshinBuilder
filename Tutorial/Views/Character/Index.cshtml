@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Character>
+
+<h1>Characters</h1>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Element</th>
+            <th>Region</th>
+            <th>Weapon Type</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var character in Model)
+        {
+            <tr>
+                <td>@character.Name</td>
+                <td>@character.Element</td>
+                <td>@character.Region</td>
+                <td>@character.CharacterWeaponType</td>
+                <td></td>
+                <td>@Html.ActionLink("Edit", "Edit", new { id = character.CharacterId })</td>
+                <td>@Html.ActionLink("Delete", "Delete", new { id = character.CharacterId })</td>
+            </tr>
+        }
+    </tbody>
+</table>
